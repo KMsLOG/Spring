@@ -63,7 +63,7 @@ public class BoardRestController {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
 	
-	// 게시글 등록 (Form 데이터 형식으로 넘어왔다)
+	// 게시글 등록 (Form 데이터 형식으로 넘어왔다) JSON 형식인면 @RequestBody로 바꿔야함
 	@PostMapping("/board")
 	public ResponseEntity<?> write(@ModelAttribute Board board){
 		// 게시글 등록 요청
