@@ -43,6 +43,16 @@ public class ReviewRestController {
 		return new ResponseEntity<String>("리뷰 등록", HttpStatus.CREATED);
 	}
 	
+	// 리뷰 상세
+	@GetMapping("/{reviewId}")
+	public ResponseEntity<?> detailReview(@PathVariable("reviewId") int reviewId){
+		Review review = service.getReview(reviewId);
+		if(review == null) {
+			return new ResponseEntity<String>("리뷰가 존재하지 않습니다.", HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Review>(review, HttpStatus.OK);
+	}
+	
 	// 유튜브 id에 맞는 리뷰 전체 목록
 	@GetMapping("/{youtubeId}")
 	public ResponseEntity<?> getReviews(@PathVariable("youtubeId") int youtubeId){

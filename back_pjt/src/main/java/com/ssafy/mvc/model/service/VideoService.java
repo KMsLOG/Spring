@@ -23,5 +23,6 @@ public interface VideoService {
 	// 비디오 삭제
 	public void removeVideo(int youtubeId);
 	
-	
+	// 조회수 내림차순 영상 목록
+	public List<Video> getVideosOrderByView();
 }

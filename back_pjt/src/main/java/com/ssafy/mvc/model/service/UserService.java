@@ -19,4 +19,7 @@ public interface UserService {
 	
 	// 유저 삭제
 	public void removeUser(String id);
+	
+	// 유저 로그인
+	public User login(String id, String password);
 }

@@ -25,4 +25,14 @@ WHERE userId = #{userId} AND followingID = #{followingId};
 
 </delete>
 
+<!-- 팔로우한 외원들이 찜한 영상 조회 -->
+<select id="selectWished" resultType="Video" parameterType="String">
+SELECT DISTINCT v.youtubeId, v.title, v.fitPartName, v.channelName, v.url, v.viewCnt
+FROM follow f
+JOIN wished w ON f.followingId = w.userId
+JOIN videos v ON w.videoId = v.youtubeId
+WHERE f.userId = #{userId};
+
+</select>
+
 </mapper>

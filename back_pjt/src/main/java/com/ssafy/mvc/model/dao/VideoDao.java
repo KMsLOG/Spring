@@ -25,4 +25,7 @@ public interface VideoDao {
 	
 	// 비디오 id로 조회수 증가
 	public void updateViewCnt(int youtubeId);
+	
+	// 조회수 내림차순 영상 목록
+	public List<Video> selectOrderByView();
 }

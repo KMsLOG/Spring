@@ -51,4 +51,10 @@ public class VideoServiceImpl implements VideoService{
 		dao.deleteVideo(youtubeId);
 	}
 
+	@Override
+	public List<Video> getVideosOrderByView() {
+		
+		return dao.selectOrderByView();
+	}
+
 }

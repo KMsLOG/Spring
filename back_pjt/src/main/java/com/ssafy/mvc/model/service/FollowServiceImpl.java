@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.mvc.model.dao.FollowDao;
 import com.ssafy.mvc.model.dto.Follow;
+import com.ssafy.mvc.model.dto.Video;
 
 @Service
 public class FollowServiceImpl implements FollowService {
@@ -38,6 +39,12 @@ public class FollowServiceImpl implements FollowService {
 	@Override
 	public List<Follow> getFollow(String userId) {
 		return dao.selectAll(userId);
+	}
+
+
+	@Override
+	public List<Video> getFollowWished(String userId) {
+		return dao.selectWished(userId);
 	}
 
 }

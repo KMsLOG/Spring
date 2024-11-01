@@ -54,6 +54,16 @@ public class VideoRestController {
 		return new ResponseEntity<List<Video>>(list,HttpStatus.OK);
 	}
 	
+	// 조회수 내림차순 영상 목록
+	@GetMapping("/viewCnt/desc")
+	public ResponseEntity<?> descList(){
+		List<Video> list = service.getVideosOrderByView();
+		if(list==null || list.size()==0) {
+			return new ResponseEntity<String>("비디오 목록이 없습니다.", HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Video>>(list,HttpStatus.OK);
+	}
+	
 	// id에 해당하는 비디오 조회
 	@GetMapping("/id/{youtubeId}")
 	public ResponseEntity<?> video(@PathVariable("youtubeId") int youtubeId){

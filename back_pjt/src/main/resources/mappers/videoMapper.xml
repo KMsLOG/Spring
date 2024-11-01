@@ -27,6 +27,13 @@
 	WHERE youtubeId=#{youtubeId};
 </select>
 
+<!-- 조회순 내림차순 비디오 조회 -->
+<select id="selectOrderByView" resultType="Video">
+	SELECT *
+	FROM videos
+	ORDER BY viewCnt DESC;
+</select>
+
 <!-- 비디오 수정 -->
 <update id="updateVideo" parameterType="Video">
 	UPDATE videos

@@ -28,8 +28,12 @@ public class UserRestController {
 	// 유저 등록
 	@PostMapping()
 	public ResponseEntity<?> regist(@RequestBody User user){
-		userService.registUser(user);
-		return new ResponseEntity<String>("등록 완료",HttpStatus.CREATED);
+	    try {
+	        userService.registUser(user);
+	        return new ResponseEntity<String>("등록 완료", HttpStatus.CREATED);
+	    } catch (IllegalArgumentException e) {
+	        return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	    }
 	}
 	
 	// 유저 전체 목록
@@ -67,5 +71,24 @@ public class UserRestController {
 		}
 		userService.removeUser(id);
 		return new ResponseEntity<String>("삭제 완료",HttpStatus.OK);
-	} 
+	}
+	
+	// 로그인
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody User user){
+		User loggedUser = userService.login(user.getId(), user.getPassword());
+		
+		if(loggedUser != null) {
+			return new ResponseEntity<User>(loggedUser, HttpStatus.OK);
+		}
+		 return new ResponseEntity<String>("아이디 또는 비밀번호가 잘못되었습니다.", HttpStatus.UNAUTHORIZED);
+	}
+	
+	//로그아웃
+	@PostMapping("/logout")
+	public ResponseEntity<?> logout() {
+        // 로그아웃 로직 넣기
+        return new ResponseEntity<String>("로그아웃 완료", HttpStatus.OK);
+    }
+	
 }
