@@ -44,7 +44,7 @@ public class ReviewRestController {
 	}
 	
 	// 리뷰 상세
-	@GetMapping("/{reviewId}")
+	@GetMapping("/reviewId/{reviewId}")
 	public ResponseEntity<?> detailReview(@PathVariable("reviewId") int reviewId){
 		Review review = service.getReview(reviewId);
 		if(review == null) {
@@ -54,7 +54,7 @@ public class ReviewRestController {
 	}
 	
 	// 유튜브 id에 맞는 리뷰 전체 목록
-	@GetMapping("/{youtubeId}")
+	@GetMapping("/youtubeId/{youtubeId}")
 	public ResponseEntity<?> getReviews(@PathVariable("youtubeId") int youtubeId){
 		List<Review> list = service.getReviews(youtubeId);
 		if(list==null || list.size()==0) {
