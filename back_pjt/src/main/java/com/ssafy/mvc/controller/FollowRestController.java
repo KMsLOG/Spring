@@ -16,6 +16,8 @@ import com.ssafy.mvc.model.dto.Follow;
 import com.ssafy.mvc.model.service.FollowService;
 import com.ssafy.mvc.model.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping("/follow")
 public class FollowRestController {
@@ -29,6 +31,7 @@ public class FollowRestController {
 	
 	// 팔로우 등록
 	@PostMapping("/{userId}")
+	@Operation(summary = "팔로우")
 	public ResponseEntity<?> follow(@PathVariable("userId") String userId,@RequestBody Follow follow){
 		if(userService.getUserById(userId)==null) {
 			return new ResponseEntity<String>("유저가 없습니다.",HttpStatus.NOT_FOUND);
@@ -43,6 +46,7 @@ public class FollowRestController {
 	}
 	// 팔로우 취소
 	@DeleteMapping("/{userId}/{followingId}")
+	@Operation(summary = "언팔로우")
 	public ResponseEntity<?> unfollow(@PathVariable("userId") String userId, @PathVariable("followingId") String followingId) {
 		if(userService.getUserById(userId)==null) {
 			return new ResponseEntity<String>("유저가 없습니다.",HttpStatus.NOT_FOUND);
@@ -60,6 +64,7 @@ public class FollowRestController {
 		
 	// 나의 팔로우 전체 목록
 	@GetMapping("/{userId}")
+	@Operation(summary = "나의 팔로우 전체 목록")
 	public ResponseEntity<?> list(@PathVariable("userId") String userId){
 		if(userService.getUserById(userId)==null) {
 			return new ResponseEntity<String>("유저가 없습니다.",HttpStatus.NOT_FOUND);

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.mvc.model.dto.Video;
 import com.ssafy.mvc.model.service.VideoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping("/video")
 public class VideoRestController {
@@ -28,6 +30,7 @@ public class VideoRestController {
 	
 	// 비디오 등록
 	@PostMapping()
+	@Operation(summary = "비디오 등록")
 	public ResponseEntity<?> addVideo(@RequestBody Video video){
 		service.registVideo(video);
 		return new ResponseEntity<String>("등록 완료",HttpStatus.CREATED);
@@ -35,6 +38,7 @@ public class VideoRestController {
 	
 	// 비디오 전체목록
 	@GetMapping
+	@Operation(summary = "비디오 전체목록")
 	public ResponseEntity<?> list(){
 		List<Video> list = service.getVideos();
 		
@@ -46,6 +50,7 @@ public class VideoRestController {
 	
 	// 비디오 운동부위별 목록
 	@GetMapping("/part/{fitPartName}")
+	@Operation(summary = "운동부위별 비디오 목록")
 	public ResponseEntity<?> partList(@PathVariable("fitPartName") String fitPartName){
 		List<Video> list = service.getVideosByPart(fitPartName);
 		if(list==null || list.size()==0) {
@@ -56,6 +61,7 @@ public class VideoRestController {
 	
 	// 조회수 내림차순 영상 목록
 	@GetMapping("/viewCnt/desc")
+	@Operation(summary = "조회수 내림차순 영상 목록")
 	public ResponseEntity<?> descList(){
 		List<Video> list = service.getVideosOrderByView();
 		if(list==null || list.size()==0) {
@@ -66,6 +72,7 @@ public class VideoRestController {
 	
 	// id에 해당하는 비디오 조회
 	@GetMapping("/id/{youtubeId}")
+	@Operation(summary = " id에 해당하는 비디오 조회")
 	public ResponseEntity<?> video(@PathVariable("youtubeId") int youtubeId){
 		Video video = service.getVideoById(youtubeId);
 		if(video == null) {
@@ -76,6 +83,7 @@ public class VideoRestController {
 	
 	// 비디오 수정
 	@PutMapping("{youtubeId}")
+	@Operation(summary = "비디오 수정")
 	public ResponseEntity<?> update(@PathVariable("youtubeId") int youtubeId,@RequestBody Video video){
 		if(service.getVideoById(youtubeId)==null) {
 			return new ResponseEntity<String>("비디오가 존재하지 않습니다.",HttpStatus.NOT_FOUND);
@@ -86,6 +94,7 @@ public class VideoRestController {
 	
 	// 비디오 삭제
 	@DeleteMapping("{youtubeId}")
+	@Operation(summary = "비디오 삭제")
 	public ResponseEntity<?> delete(@PathVariable("youtubeId") int youtubeId){
 		if(service.getVideoById(youtubeId)==null) {
 			return new ResponseEntity<String>("비디오가 존재하지 않습니다.",HttpStatus.NOT_FOUND);

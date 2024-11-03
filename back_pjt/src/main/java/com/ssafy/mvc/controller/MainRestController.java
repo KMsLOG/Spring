@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.mvc.model.dto.Follow;
 import com.ssafy.mvc.model.dto.Video;
 import com.ssafy.mvc.model.service.FollowService;
-import com.ssafy.mvc.model.service.WishedService;
+
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 public class MainRestController {
@@ -25,6 +25,7 @@ public class MainRestController {
 	
 	// 팔로우한 외원들이 찜한 영상 조회
 	@GetMapping("/{userId}")
+	@Operation(summary = "팔로우한 회원들이 찜한 영상 조회")
 	public ResponseEntity<?> getFollowWished(@PathVariable("userId") String userId){
 		List<Video> list = followService.getFollowWished(userId);
 		
