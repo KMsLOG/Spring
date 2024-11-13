@@ -18,6 +18,8 @@ import com.ssafy.mvc.model.dto.Review;
 import com.ssafy.mvc.model.service.ReviewService;
 import com.ssafy.mvc.model.service.VideoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 
 @RestController
 @RequestMapping("/review")
@@ -34,6 +36,7 @@ public class ReviewRestController {
 	
 	// 리뷰 등록
 	@PostMapping("/{youtubeId}")
+	@Operation(summary = "리뷰 등록")
 	public ResponseEntity<?> addReview(@PathVariable("youtubeId") int youtubeId,@RequestBody Review review){
 		if(videoService.getVideoById(youtubeId)==null) {
 			return new ResponseEntity<String>("비디오가 존재하지 않습니다.", HttpStatus.NOT_FOUND);
@@ -45,6 +48,7 @@ public class ReviewRestController {
 	
 	// 리뷰 상세
 	@GetMapping("/reviewId/{reviewId}")
+	@Operation(summary = "리뷰 상세")
 	public ResponseEntity<?> detailReview(@PathVariable("reviewId") int reviewId){
 		Review review = service.getReview(reviewId);
 		if(review == null) {
@@ -55,6 +59,7 @@ public class ReviewRestController {
 	
 	// 유튜브 id에 맞는 리뷰 전체 목록
 	@GetMapping("/youtubeId/{youtubeId}")
+	@Operation(summary = "유튜브 id에 맞는 리뷰 전체 목록")
 	public ResponseEntity<?> getReviews(@PathVariable("youtubeId") int youtubeId){
 		List<Review> list = service.getReviews(youtubeId);
 		if(list==null || list.size()==0) {
@@ -65,6 +70,7 @@ public class ReviewRestController {
 	
 	// 리뷰 수정
 	@PutMapping("{reviewId}")
+	@Operation(summary = "리뷰 수정")
 	public ResponseEntity<?> updateReview(@PathVariable("reviewId") int reviewId, @RequestBody Review review){
 		if(service.getReview(reviewId)==null) {
 			return new ResponseEntity<String>("리뷰가 없습니다.",HttpStatus.NOT_FOUND);
@@ -75,6 +81,7 @@ public class ReviewRestController {
 	
 	// 리뷰 삭제
 	@DeleteMapping("{reviewId}")
+	@Operation(summary = "리뷰 삭제")
 	public ResponseEntity<?> deleteReview(@PathVariable("reviewId") int reviewId){
 		if(service.getReview(reviewId)==null) {
 			return new ResponseEntity<String>("리뷰가 없습니다.",HttpStatus.NOT_FOUND);

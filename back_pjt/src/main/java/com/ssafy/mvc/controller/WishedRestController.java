@@ -19,6 +19,8 @@ import com.ssafy.mvc.model.service.UserService;
 import com.ssafy.mvc.model.service.VideoService;
 import com.ssafy.mvc.model.service.WishedService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping("/wished")
 public class WishedRestController {
@@ -34,6 +36,7 @@ public class WishedRestController {
 	
 	// 찜 영상 등록
 	@PostMapping()
+	@Operation(summary = "찜 영상 등록")
 	public ResponseEntity<?> add(@RequestBody Wished wished){
 		if(userService.getUserById(wished.getUserId())==null) {
 			return new ResponseEntity<String>("유저가 없습니다.",HttpStatus.NOT_FOUND);
@@ -47,6 +50,7 @@ public class WishedRestController {
 	}
 	// 찜 영상 삭제
 	@DeleteMapping()
+	@Operation(summary = "찜 영상 삭제")
 	public ResponseEntity<?> remove(@RequestBody Wished wished){
 		if(userService.getUserById(wished.getUserId())==null) {
 			return new ResponseEntity<String>("유저가 없습니다.",HttpStatus.NOT_FOUND);
@@ -61,6 +65,7 @@ public class WishedRestController {
 	
 	// 전체 찜 영상 목록
 	@GetMapping("/{userId}")
+	@Operation(summary = "나의 전체 찜 영상 목록")
 	public ResponseEntity<?> list(@PathVariable("userId") String userId){
 		if(userService.getUserById(userId)==null) {
 			return new ResponseEntity<String>("유저가 없습니다.",HttpStatus.NOT_FOUND);
